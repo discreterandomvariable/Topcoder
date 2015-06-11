@@ -1,0 +1,260 @@
+##No. of records for each subjid 
+1
+123
+366
+1462
+2558
+
+###Values that dont change for each record of a subjid
+subjid	siteid	sexn	feedingn	gagebrth	birthwt-same as wtkg_1	birthlen-same as lencm_1	apgar1	apgar5	mage	demo1n	mmaritn	mcignum	parity	gravida	meducyrs	demo2n
+
+###Values that change for each record of subjid
+wtkg_1	lencm_1	bmi_1	waz_1	haz_1	whz_1	baz_1	wtkg_123	waz_123	wtkg_366	lencm_366	bmi_366	waz_366	haz_366	whz_366	baz_366	wtkg_1462	htcm_1462	bmi_1462	waz_1462	haz_1462	whz_1462	baz_1462	wtkg_2558	htcm_2558	bmi_2558	geniq
+
+###Factor Variables-
+siteid
+sexn
+feedingn
+gagebrth
+apgar1
+apgar5
+demo1n
+mmaritn
+demo2n
+
+####New Variables Added:
+change_wtkg_1=(wtkg_123-wtkg_1)/122
+change_ht_1=(lencm_366-lencm_1)/365
+change_wtkg_2=(wtkg_366-wtkg_123)/(366-123)
+change_ht_2=(htcm_1462-lencm_366)/(1462-366)
+change_wtkg_3=(wtkg_1462-wtkg_366)/(1462-366)
+change_ht_3=(htcm_2558-htcm_1462)/(2558-1462)
+change_wtkg_4=(wtkg_2558-wtkg_1462)/(2558-1462)
+change_bmi_1=(bmi_366-bmi_1)/365
+change_bmi_2=(bmi_1462-bmi_366)/(1462-366)
+change_bmi_3=(bmi_2558-bmi_1462)/(2558-1462)
+
+###Correlation>0.9
+$mage
+mage 
+   1 
+
+$mcignum
+mcignum 
+      2 
+
+$parity
+ parity gravida 
+      3       4 
+
+$gravida
+ parity gravida 
+      3       4 
+
+$meducyrs
+meducyrs 
+       5 
+
+$wtkg_1
+wtkg_1  waz_1 
+     6      9 
+
+$lencm_1
+lencm_1   haz_1 
+      7      10 
+
+$bmi_1
+bmi_1 baz_1 
+    8    12 
+
+$waz_1
+wtkg_1  waz_1 
+     6      9 
+
+$haz_1
+lencm_1   haz_1 
+      7      10 
+
+$whz_1
+whz_1 
+   11 
+
+$baz_1
+bmi_1 baz_1 
+    8    12 
+
+$wtkg_123
+wtkg_123 
+      13 
+
+$waz_123
+waz_123 
+     14 
+
+$wtkg_366
+wtkg_366  waz_366 
+      15       18 
+
+$lencm_366
+lencm_366   haz_366 
+       16        19 
+
+$bmi_366
+bmi_366 whz_366 baz_366 
+     17      20      21 
+
+$waz_366
+wtkg_366  waz_366 
+      15       18 
+
+$haz_366
+lencm_366   haz_366 
+       16        19 
+
+$whz_366
+bmi_366 whz_366 baz_366 
+     17      20      21 
+
+$baz_366
+bmi_366 whz_366 baz_366 
+     17      20      21 
+
+$wtkg_1462
+wtkg_1462  waz_1462 
+       22        25 
+
+$htcm_1462
+htcm_1462  haz_1462 
+       23        26 
+
+$bmi_1462
+bmi_1462 whz_1462 baz_1462 
+      24       27       28 
+
+$waz_1462
+wtkg_1462  waz_1462 
+       22        25 
+
+$haz_1462
+htcm_1462  haz_1462 
+       23        26 
+
+$whz_1462
+bmi_1462 whz_1462 baz_1462 
+      24       27       28 
+
+$baz_1462
+bmi_1462 whz_1462 baz_1462 
+      24       27       28 
+
+$wtkg_2558
+    wtkg_2558 change_wtkg_4 
+           29            39 
+
+$htcm_2558
+htcm_2558 
+       30 
+
+$bmi_2558
+bmi_2558 
+      31 
+
+$geniq
+geniq 
+   32 
+
+$change_wtkg_1
+change_wtkg_1 
+           33 
+
+$change_ht_1
+change_ht_1 
+         34 
+
+$change_wtkg_2
+change_wtkg_2 
+           35 
+
+$change_ht_2
+change_ht_2 
+         36 
+
+$change_wtkg_3
+change_wtkg_3 
+           37 
+
+$change_ht_3
+change_ht_3 
+         38 
+
+$change_wtkg_4
+    wtkg_2558 change_wtkg_4 
+           29            39 
+
+$change_bmi_1
+change_bmi_1 
+          40 
+
+$change_bmi_2
+change_bmi_2 
+          41 
+
+$change_bmi_3
+change_bmi_3 
+          42 
+
+
+
+Transformation:
+x-mean(x))/sd(x)
+
+Eliminating variables with co-efficients having p-value>0.05
+geniq ~ meducyrs + I(meducyrs^2) + I(waz_366^3) + I(waz_366^2) + waz_366 
+    + I(change_ht_1^2) + change_ht_1 + change_ht_3 + I(change_wtkg_4^2) + change_wtkg_4
+    + I(change_ht_3^2) + I(change_wtkg_4^3) + mage + mcignum + parity + 
+    gravida + waz_1 + haz_1 + whz_1 + baz_1 + waz_123 + haz_366 + whz_366 +
+    baz_366 + waz_1462 + haz_1462 + whz_1462 + baz_1462 + change_wtkg_1 +
+    change_wtkg_2 + change_ht_2 + change_wtkg_3 + change_bmi_1 + change_bmi_2 + 
+    change_bmi_3 + siteid + sexn + feedingn + gagebrth + apgar1 + apgar5 +
+    demo1n + mmaritn + demo2n + siteid:sexn + siteid:feedingn + siteid:gagebrth 
+    + siteid:apgar1 + mmaritn:demo2n + siteid:demo2n + siteid:mmaritn 
+    + siteid:apgar5 + siteid:demo1n + sexn:feedingn + sexn:gagebrth 
+    + sexn:apgar1 + sexn:demo2n + sexn:mmaritn + sexn:apgar5 + sexn:demo1n 
+    + feedingn:gagebrth + feedingn:apgar1 + gagebrth:apgar1 + apgar1:apgar5 
+    + demo1n:demo2n + demo1n:mmaritn + feedingn:demo2n + feedingn:mmaritn 
+    + feedingn:demo1n + feedingn + gagebrth:demo2n + gagebrth:mmaritn 
+    + gagebrth:demo1n +gagebrth + apgar1:demo2n + apgar1:mmaritn 
+    + apgar1:demo1n + apgar5:demo2n + apgar5:mmaritn + apgar5:demo1n
+
+Forward Search and Backward Elimination
+geniq ~ meducyrs + I(meducyrs^2) + I(waz_366^3) + I(waz_366^2) + waz_366 + 
+I(change_ht_1^2) + change_ht_3 + I(change_wtkg_4^2) + I(change_ht_3^2) + mage + 
+waz_1 + change_wtkg_1 + siteid + sexn + feedingn + apgar5 + demo1n + mmaritn + demo2n +
+siteid:feedingn + siteid:gagebrth + siteid:apgar1 + mmaritn:demo2n + siteid:demo2n +
+siteid:mmaritn + siteid:apgar5 + siteid:demo1n + sexn:gagebrth + sexn:apgar5 +
+sexn:demo1n + feedingn:gagebrth + feedingn:apgar1 + gagebrth:apgar1 + apgar1:apgar5 +
+feedingn:demo1n + gagebrth:mmaritn + feedingn:mmaritn + apgar1:mmaritn + apgar1:demo2n +
+apgar5:mmaritn + apgar5:demo1n
+
+to 
+
+Null
+
+###Model1
+formula = geniq ~ meducyrs + I(meducyrs^2) + I(waz_366^3) + 
+                I(waz_366^2) + I(change_ht_1^2) + change_ht_3 + I(change_wtkg_4^2) + 
+                I(change_ht_3^2) + waz_1 + change_wtkg_1 + siteid + sexn  
+               + apgar5 + demo1n + demo2n + sexn:demo1n + feedingn:demo1n
+              
+###Model2
+formula = geniq ~ siteid + meducyrs + demo1n + demo2n + waz_366 + 
+                 feedingn + I(waz_366^2) + waz_1 + change_wtkg_1 + I(meducyrs^2) + 
+                 I(change_ht_3^2) + I(waz_366^3) + change_ht_3 + I(change_wtkg_4^2) + 
+                 I(change_ht_1^2) + apgar5 + sexn + demo1n:feedingn + demo1n:sexn 
+                
+
+
+specificity TNR=TN/FP+TN
+sensitivity TPR=TP/TP+FN
+on average A patient would have more abnormal test results than 80% of controls
+
